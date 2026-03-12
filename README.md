@@ -112,8 +112,8 @@ docker compose down -v
 # View logs
 docker compose logs -f redis
 
-# Open Redis CLI
-docker exec -it redis redis-cli -a "$REDIS_PASSWORD"
+# Open Redis CLI (password is read from the container's environment, not the host)
+docker exec -it redis sh -c 'redis-cli -a "$REDIS_PASSWORD"'
 ```
 
 ---
