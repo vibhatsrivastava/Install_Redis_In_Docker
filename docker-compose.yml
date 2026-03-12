@@ -8,11 +8,11 @@ services:
     volumes:
       - redis_data:/data
       - ./redis.conf:/etc/redis/redis.conf:ro
-    command: redis-server /etc/redis/redis.conf --requirepass ${REDIS_PASSWORD}
+    command: ["sh", "-c", "redis-server /etc/redis/redis.conf --requirepass \"$REDIS_PASSWORD\""]
     env_file:
       - .env
     healthcheck:
-      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      test: ["CMD-SHELL", "redis-cli -a \"$REDIS_PASSWORD\" ping || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
