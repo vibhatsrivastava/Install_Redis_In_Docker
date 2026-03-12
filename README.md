@@ -53,8 +53,8 @@ docker compose up -d
 # Check container status
 docker compose ps
 
-# Ping Redis (replace with your actual password)
-docker exec redis redis-cli -a "$REDIS_PASSWORD" ping
+# Ping Redis using the password from the container environment
+docker exec redis sh -c 'redis-cli -a "$REDIS_PASSWORD" ping'
 # Expected output: PONG
 ```
 
